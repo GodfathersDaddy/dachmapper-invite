@@ -16,12 +16,12 @@
  <p>Sieh freigegebene Dach-Orte und verbinde dich für gemeinsame Besuche. Dein aktueller GPS-Standort wird nicht geteilt.</p>
  <a class="button" id="open" hidden>Dachmapper öffnen</a>
  <p id="error" hidden>Dieser Link ist unvollständig. Bitte frage nach einer neuen Einladung.</p>
- <small>Du brauchst Dachmapper ab Version 0.8. Frage die einladende Person nach der APK und installiere sie zuerst. Falls das Öffnen nicht klappt: Kopiere den gesamten Link und wähle in Dachmapper „Verbinden → Freundesnetz → Einladungslink einfügen“.</small>
- <small>Ein Link gilt sieben Tage für eine neue Person. Teile ihn nur mit dem gewünschten Freund. Diese Seite enthält keine Benutzerprofile, Ortsdaten oder API-Schlüssel.</small>
+ <small>Du brauchst Dachmapper ab Version 0.9 und dein eigenes GitHub-Konto. Bitte den Besitzer des Freundesnetzes, deinen GitHub-Namen einzuladen. Nimm die Organisationseinladung bei GitHub an und melde dich dann in Dachmapper an.</small>
+ <small>Frage die einladende Person nach der APK. Falls das Öffnen nicht klappt, füge diesen Link unter „Verbinden → Freundesnetz“ ein. Diese Seite enthält keine Benutzerprofile, Ortsdaten oder API-Schlüssel. Freunde können deine freigegebenen Orte lesen; nur du und der Organisationsinhaber können deine Repository-Daten ändern.</small>
 </main>
 <script>
  const p=new URLSearchParams(location.hash.slice(1));
- const repo=p.get('repo')||'',invite=p.get('invite')||'',name=(p.get('by')||'').slice(0,80);
- const valid=repo==='GodfathersDaddy/dachmapper-data'&&/^[A-Za-z0-9_-]{43}$/.test(invite);
- if(valid){const q=new URLSearchParams({repo,invite,by:name});const open=document.getElementById('open');open.href='dachmapper://network?'+q.toString();open.hidden=false;if(name)document.getElementById('inviter').textContent=name+' lädt dich ins Dachmapper-Freundesnetz ein.';}else document.getElementById('error').hidden=false;
+ const org=p.get('org')||'',from=p.get('from')||'',name=(p.get('by')||'').slice(0,80);
+ const valid=org==='Dachmapper-Freunde'&&(!from||/^[1-9][0-9]{0,18}$/.test(from));
+ if(valid){const q=new URLSearchParams({org,from,by:name});const open=document.getElementById('open');open.href='dachmapper://network?'+q.toString();open.hidden=false;if(name)document.getElementById('inviter').textContent=name+' lädt dich ins Dachmapper-Freundesnetz ein.';}else document.getElementById('error').hidden=false;
 </script></body></html>
