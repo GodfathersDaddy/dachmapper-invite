@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="de">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="referrer" content="no-referrer">
+ <title>Dachmapper – Gemeinsam unterwegs</title>
+ <style>
+  :root{color-scheme:dark;font-family:system-ui,sans-serif;background:#101b27;color:#f2f7fa}body{margin:0;padding:24px;min-height:90vh;display:grid;place-items:center}main{max-width:480px;background:#1a2938;border-radius:28px;padding:32px}h1{font-size:30px;line-height:1.15}p{line-height:1.6;color:#a6b7c5}.tag{color:#9ee8c4}a.button{display:block;border-radius:16px;background:#9ee8c4;color:#101b27;text-align:center;padding:18px;text-decoration:none;font-weight:650;margin-top:24px}small{display:block;line-height:1.6;color:#a6b7c5;margin-top:24px}
+ </style>
+</head>
+<body><main>
+ <div class="tag">DACHMAPPER · GEMEINSAM UNTERWEGS</div>
+ <h1>Die Aussicht ist besser zusammen.</h1>
+ <p id="inviter">Du hast eine Einladung ins private Dachmapper-Freundesnetz bekommen.</p>
+ <p>Sieh freigegebene Dach-Orte und verbinde dich für gemeinsame Besuche. Dein aktueller GPS-Standort wird nicht geteilt.</p>
+ <a class="button" id="open" hidden>Dachmapper öffnen</a>
+ <p id="error" hidden>Dieser Link ist unvollständig. Bitte frage nach einer neuen Einladung.</p>
+ <small>Du brauchst Dachmapper ab Version 0.8. Frage die einladende Person nach der APK und installiere sie zuerst. Falls das Öffnen nicht klappt: Kopiere den gesamten Link und wähle in Dachmapper „Verbinden → Freundesnetz → Einladungslink einfügen“.</small>
+ <small>Ein Link gilt sieben Tage für eine neue Person. Teile ihn nur mit dem gewünschten Freund. Diese Seite enthält keine Benutzerprofile, Ortsdaten oder API-Schlüssel.</small>
+</main>
+<script>
+ const p=new URLSearchParams(location.hash.slice(1));
+ const repo=p.get('repo')||'',invite=p.get('invite')||'',name=(p.get('by')||'').slice(0,80);
+ const valid=repo==='GodfathersDaddy/dachmapper-data'&&/^[A-Za-z0-9_-]{43}$/.test(invite);
+ if(valid){const q=new URLSearchParams({repo,invite,by:name});const open=document.getElementById('open');open.href='dachmapper://network?'+q.toString();open.hidden=false;if(name)document.getElementById('inviter').textContent=name+' lädt dich ins Dachmapper-Freundesnetz ein.';}else document.getElementById('error').hidden=false;
+</script></body></html>
